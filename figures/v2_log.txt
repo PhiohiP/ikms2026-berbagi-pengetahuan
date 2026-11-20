@@ -1,0 +1,8 @@
+conv 26
+curve 74
+levers 310
+sens 441
+bc 520
+seq 579
+nk 598
+done 599

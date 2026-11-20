@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "Bila memakai kode atau data ini, mohon sitasi makalah berikut."
+title: "Kode simulasi: Kerangka Teori Permainan Evolusioner untuk Berbagi Pengetahuan Lintas Kelompok Pascaperubahan Institusional"
+authors:
+  - family-names: Alphionanda
+    given-names: Heart
+    affiliation: Institut Teknologi Bandung
+  - family-names: Ramadhani
+    given-names: Adinda Cahya
+    affiliation: Institut Teknologi Bandung
+  - family-names: Albayani
+    given-names: Syauqi Mujaddid
+    affiliation: Institut Teknologi Bandung
+license: MIT
+date-released: 2026-11-20
+preferred-citation:
+  type: conference-paper
+  title: "Kerangka Teori Permainan Evolusioner untuk Berbagi Pengetahuan Lintas Kelompok Pascaperubahan Institusional: Kasus Ilustratif Penggabungan PT Pertamina Patra Niaga"
+  authors:
+    - family-names: Alphionanda
+      given-names: Heart
+    - family-names: Ramadhani
+      given-names: Adinda Cahya
+    - family-names: Albayani
+      given-names: Syauqi Mujaddid
+  collection-title: "Prosiding Indonesia Knowledge Management Summit (IKMS) 2026"
+  year: 2026
