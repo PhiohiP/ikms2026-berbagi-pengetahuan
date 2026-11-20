@@ -20,6 +20,8 @@ Kode simulasi dan data hasil untuk makalah IKMS 2026 (Indonesia Knowledge Manage
 Python 3.10 atau lebih baru.
 
 ```bash
+git clone https://github.com/PhiohiP/ikms2026-berbagi-pengetahuan.git
+cd ikms2026-berbagi-pengetahuan
 pip install -r requirements.txt
 python baseline_lattice.py 100 5000   # validasi mesin imitasi terhadap Szabó dkk. (2005), sekitar 2 menit
 python run_v2.py                      # kurva bias, instrumen, belanja, sensitivitas, sapuan b/c (sekitar 10 menit, 2 inti)
