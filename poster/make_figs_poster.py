@@ -21,7 +21,7 @@ OUT = os.path.join(HERE, "figs_poster"); os.makedirs(OUT, exist_ok=True)
 plt.style.use(os.path.join(HERE, "publication.mplstyle"))
 
 W = 14.23                     # lebar teks di dalam kartu kolom poster (inci)
-INK, RED, GREY, LIGHT = "#0E2A47", "#C8102E", "#6F8299", "#B4C1D0"   # palet Navy Pertamina, diaudit dengan palette_audit.py
+INK, RED, GREY, LIGHT = "#0E2A47", "#C8102E", "#56677D", "#B4C1D0"   # palet Navy Pertamina, diaudit dengan palette_audit.py
 plt.rcParams.update({
     "font.family": "Fira Sans", "font.size": 21, "axes.labelsize": 22, "xtick.labelsize": 20,
     "ytick.labelsize": 20, "legend.fontsize": 20, "axes.linewidth": 1.2, "xtick.major.width": 1.2,
@@ -60,7 +60,7 @@ hs = sorted(R2["curve"], key=float); x = np.array([float(h) for h in hs])
 cin = np.array([boot([r[0] for r in R2["curve"][h]]) for h in hs])
 cout = np.array([boot([r[1] for r in R2["curve"][h]]) for h in hs])
 pns = np.array([boot([1.0 if r[1] > 0.5 else 0.0 for r in R2["curve"][h]]) for h in hs])
-fig, (a1, a2) = plt.subplots(1, 2, figsize=(W, 3.2), gridspec_kw={"wspace": 0.42})
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(W, 3.05), gridspec_kw={"wspace": 0.42})
 for ax in (a1, a2):
     ax.axvspan(0.32, 0.43, color=LIGHT, alpha=0.35, lw=0, zorder=0)   # rentang metaanalisis (lihat keterangan)
     ax.set_xlim(0, 1.5); ax.set_xticks([0, 0.3, 0.6, 1.0, 1.5]); ax.xaxis.set_major_formatter(koma)
@@ -76,7 +76,7 @@ a2.plot(x, pns[:, 0] * 100, color=RED, marker="o", ms=7)
 a2.axhline(50, color=GREY, lw=1.2, ls=(0, (4, 4)), zorder=0)
 a2.set_ylim(0, 100); a2.set_yticks([0, 25, 50, 75, 100]); a2.set_ylabel("Tidak silo (%)")
 panel(a1, "(a)"); panel(a2, "(b)")
-fig.subplots_adjust(left=0.0743, right=0.9743, bottom=0.30, top=0.82)
+fig.subplots_adjust(left=0.0743, right=0.9743, bottom=0.30 * 3.2 / 3.05, top=1 - 0.18 * 3.2 / 3.05)
 save(fig, "g2_silo")
 NUM["silo"] = {"out": {h: cout[i].tolist() for i, h in enumerate(hs)}, "in_range": [cin[:, 0].min(), cin[:, 0].max()],
                "nonsilo_pct": {h: (pns[i] * 100).tolist() for i, h in enumerate(hs)}}
@@ -85,7 +85,7 @@ NUM["silo"] = {"out": {h: cout[i].tolist() for i, h in enumerate(hs)}, "in_range
 ROWS = [("Tanpa kebijakan", "beta|0"), ("Rotasi, r = 0,2", "rot|0.2"), ("Forum, φ = 0,6", "phi|0.6"),
         ("Bonus, β = c", "beta|1.0"), ("Reputasi, ρ = 0,1", "rho|0.1")]
 vals = {(l, sc): boot([r[1] for r in R2["levers"][f"{sc}|{k}"]]) for l, k in ROWS for sc in ("rendah", "tinggi")}
-fig, ax = plt.subplots(figsize=(W, 3.2))
+fig, ax = plt.subplots(figsize=(W, 3.1))
 ys = np.arange(len(ROWS))[::-1]
 for y, (lab, _) in zip(ys, ROWS):
     lo, hi = vals[(lab, "rendah")], vals[(lab, "tinggi")]
@@ -97,10 +97,10 @@ ax.set_yticks(ys); ax.set_yticklabels([r[0] for r in ROWS]); ax.tick_params(axis
 ax.spines["left"].set_visible(False); ax.set_ylim(-0.6, len(ROWS) - 0.4)
 ax.set_xlim(0, 1); ax.set_xticks([0, 0.25, 0.5, 0.75, 1]); ax.xaxis.set_major_formatter(koma)
 ax.set_xlabel("Berbagi lintas kelompok")
-ax.plot([], [], "o", ms=11, mfc=RED, mec=RED, label="bias tinggi, h = 1,0")
-ax.plot([], [], "o", ms=11, mfc="white", mec=INK, mew=2.2, label="bias rendah, h = 0,3")
+ax.plot([], [], "o", ms=11, mfc=RED, mec=RED, label="h = 1,0 (uji tekanan)")
+ax.plot([], [], "o", ms=11, mfc="white", mec=INK, mew=2.2, label="h = 0,3 (rentang kalibrasi)")
 ax.legend(loc="lower left", bbox_to_anchor=(0.0, 1.0), ncol=2, handletextpad=0.3, borderaxespad=0.1, columnspacing=1.5)
-fig.subplots_adjust(left=0.194, right=0.944, bottom=0.28, top=0.82)
+fig.subplots_adjust(left=0.194, right=0.944, bottom=0.896 / 3.1, top=1 - 0.576 / 3.1)
 save(fig, "g3_instrumen")
 NUM["instrumen"] = {f"{l}|{s}": v for (l, s), v in vals.items()}
 
@@ -138,7 +138,7 @@ ST = [("rotasi saja", GREY, (0, (1.5, 2.5)), 2.4, "rotasi saja"),
       ("serentak", INK, (0, (6, 4)), 2.4, "serentak"),
       ("bertahap", INK, "-", 3.0, "bertahap"),
       ("bonus dicabut saat rotasi", RED, "-", 3.0, "bonus dicabut")]
-fig, ax = plt.subplots(figsize=(W, 3.3))
+fig, ax = plt.subplots(figsize=(W, 3.1))
 end = {}
 for k, c, ls, lw, lab in ST:
     A = np.array(R3["traj"][k])[:, :, 1]; ts = np.arange(A.shape[1]) * 10; mu = A.mean(0)
@@ -158,7 +158,7 @@ ax.text(4360, (yb + yd) / 2, "0,50 [0,43; 0,56]", ha="right", va="center", fonts
 ax.set_xlim(0, 4500); ax.set_xticks([0, 1500, 3000, 4500]); ax.set_xticklabels(["0", "1.500", "3.000", "4.500"])
 ax.set_ylim(0, 1); ax.set_yticks([0, 0.5, 1]); ax.yaxis.set_major_formatter(koma)
 ax.set_xlabel("Langkah Monte Carlo (MCS)"); ax.set_ylabel("Berbagi lintas\nkelompok")
-fig.subplots_adjust(left=0.1065, right=0.8215, bottom=0.265, top=0.97)
+fig.subplots_adjust(left=0.1065, right=0.8215, bottom=1 - (1 - 0.265) * 3.3 / 3.1 if False else 0.265 * 3.3 / 3.1, top=1 - 0.03 * 3.3 / 3.1)
 save(fig, "g5_lintasan")
 NUM["lintasan_akhir"] = end
 

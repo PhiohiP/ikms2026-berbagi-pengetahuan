@@ -50,6 +50,7 @@ Semua hasil (JSON dan PNG) ditulis ke `figures/`. Hasil yang dipakai di makalah 
 | Lintasan waktu melewati rotasi | `run_v33_traj.py`, `make_figures_v32.py` | `figures/v33_results.json` |
 | Peta efek rotasi terhadap bias (tambahan untuk poster) | `run_v34_rotmap.py` | `figures/v34_rotmap.json` |
 | Gambar poster | `poster/make_figs_poster.py` | membaca JSON di `figures/` |
+| Angka tambahan di poster: kepekaan ambang silo, penurunan dari tingkat sebelum rotasi | `poster/analisis_tambahan.py` | `figures/v2_results.json`, `figures/v33_results.json` |
 
 `model.py` berisi jaringan, utilitas, dan dinamika dasar; `model_v1.py` menambahkan status akhir strategi, belanja kebijakan, dan lapis NK.
 
