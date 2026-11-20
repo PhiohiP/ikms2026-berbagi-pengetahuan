@@ -98,7 +98,7 @@ ax.spines["left"].set_visible(False); ax.set_ylim(-0.6, len(ROWS) - 0.4)
 ax.set_xlim(0, 1); ax.set_xticks([0, 0.25, 0.5, 0.75, 1]); ax.xaxis.set_major_formatter(koma)
 ax.set_xlabel("Berbagi lintas kelompok")
 ax.plot([], [], "o", ms=11, mfc=RED, mec=RED, label="h = 1,0 (uji tekanan)")
-ax.plot([], [], "o", ms=11, mfc="white", mec=INK, mew=2.2, label="h = 0,3 (rentang kalibrasi)")
+ax.plot([], [], "o", ms=11, mfc="white", mec=INK, mew=2.2, label="h = 0,3 (batas bawah kalibrasi)")
 ax.legend(loc="lower left", bbox_to_anchor=(0.0, 1.0), ncol=2, handletextpad=0.3, borderaxespad=0.1, columnspacing=1.5)
 fig.subplots_adjust(left=0.194, right=0.944, bottom=0.896 / 3.1, top=1 - 0.576 / 3.1)
 save(fig, "g3_instrumen")
@@ -138,7 +138,7 @@ ST = [("rotasi saja", GREY, (0, (1.5, 2.5)), 2.4, "rotasi saja"),
       ("serentak", INK, (0, (6, 4)), 2.4, "serentak"),
       ("bertahap", INK, "-", 3.0, "bertahap"),
       ("bonus dicabut saat rotasi", RED, "-", 3.0, "bonus dicabut")]
-fig, ax = plt.subplots(figsize=(W, 3.1))
+fig, ax = plt.subplots(figsize=(W, 2.95))
 end = {}
 for k, c, ls, lw, lab in ST:
     A = np.array(R3["traj"][k])[:, :, 1]; ts = np.arange(A.shape[1]) * 10; mu = A.mean(0)
@@ -158,7 +158,7 @@ ax.text(4360, (yb + yd) / 2, "0,50 [0,43; 0,56]", ha="right", va="center", fonts
 ax.set_xlim(0, 4500); ax.set_xticks([0, 1500, 3000, 4500]); ax.set_xticklabels(["0", "1.500", "3.000", "4.500"])
 ax.set_ylim(0, 1); ax.set_yticks([0, 0.5, 1]); ax.yaxis.set_major_formatter(koma)
 ax.set_xlabel("Langkah Monte Carlo (MCS)"); ax.set_ylabel("Berbagi lintas\nkelompok")
-fig.subplots_adjust(left=0.1065, right=0.8215, bottom=1 - (1 - 0.265) * 3.3 / 3.1 if False else 0.265 * 3.3 / 3.1, top=1 - 0.03 * 3.3 / 3.1)
+fig.subplots_adjust(left=0.1065, right=0.8215, bottom=0.265 * 3.3 / 2.95, top=1 - 0.03 * 3.3 / 2.95)
 save(fig, "g5_lintasan")
 NUM["lintasan_akhir"] = end
 
